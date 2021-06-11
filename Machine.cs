@@ -33,6 +33,7 @@ namespace Bloops.StateMachine {
 
 		public void StartMachine(bool triggerOnStart = false)
 		{
+			stateStack.Clear();
 			stateStack.Push(_defaultState);
 			_defaultState.OnEntry();
 			if (triggerOnStart)
@@ -52,21 +53,28 @@ namespace Bloops.StateMachine {
 		}
 		
 		public void Trigger() {
-			if(current.Trigger(out var next))
+			if (stateStack.Count > 0)
 			{
-				if (next != null)
+				if (current.Trigger(out var next))
 				{
-					next.OnEntry();
-					stateStack.Push(next);
-				}
-				else
-				{
-					if (stateStack.Count > 1)
+					if (next != null)
 					{
-						stateStack.Pop();//Get rid of the current - the one we just triggered.
-						stateStack.Peek().OnEntry();//The new top of the stack is the new current, and we just transitioned back to it.
+						next.OnEntry();
+						stateStack.Push(next);
+					}
+					else
+					{
+						if (stateStack.Count > 1)
+						{
+							stateStack.Pop(); //Get rid of the current - the one we just triggered.
+							stateStack.Peek().OnEntry(); //The new top of the stack is the new current, and we just transitioned back to it.
+						}
 					}
 				}
+			}
+			else
+			{
+				Debug.LogWarning("State Machine triggered without any states. Add default or remember to both initiate and to StartMachine");
 			}
 		}
 	}

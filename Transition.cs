@@ -15,7 +15,7 @@ namespace Bloops.StateMachine
 		[Tooltip("Lower numbered transitions get higher priority when the state looks for one that is true. Used to disambiguate when transitions are conflicting")]
 		[SerializeField] public int CheckSortingOrder;
 
-		[Header("Transition objects")] [RequireInterface(typeof(ICondition))]
+		[Header("Conditional scriptableObjects")] [RequireInterface(typeof(ICondition))]
 		public ScriptableObject[] conditionObjects;
 		//
 		public virtual void Reset()
