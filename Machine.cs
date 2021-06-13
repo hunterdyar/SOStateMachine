@@ -11,7 +11,7 @@ namespace Bloops.StateMachine {
 		public State current => stateStack.Peek();
 		private Stack<State> stateStack = new Stack<State>();
 		public List<State> states;
-	
+
 		//im nto worried about making a visual editor for all of this untl Unity's Graph Tools Foundation is at v 1.0 or some stable-api beta.
 		//https://docs.unity3d.com/Packages/com.unity.graphtools.foundation@0.8/manual/index.html
 		
@@ -52,6 +52,7 @@ namespace Bloops.StateMachine {
 			return null;
 		}
 		
+		[ContextMenu("Trigger Machine")]
 		public void Trigger() {
 			if (stateStack.Count > 0)
 			{

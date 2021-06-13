@@ -12,8 +12,8 @@ namespace Bloops.StateMachine
 		void Awake()
 		{
 			state.AddListener(this);
-			gameObject.SetActive(false);//the "entry" state is to turn off, and the first state gets an OnEntry, which will enable us.
-			// gameObject.SetActive(state.IsActive);//the "entry" state is to turn off, and the first state gets an OnEntry, which will enable us.
+			gameObject.SetActive(false);
+			//the "entry" state is to turn off, and the first state gets an OnEntry, which will enable us.
 		}
 
 		private void OnStateInit()
